@@ -1,1 +1,5 @@
-# subtraiddemo
+# Insurance Poc Backend
+
+### Typescript
+
+### Sequelize ORM
