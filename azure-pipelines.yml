@@ -28,4 +28,4 @@ stages:
         git fetch github
         git checkout -B main github/main  # Replace 'main' with your branch name
         git push origin main --force  # Replace 'main' with your branch name if different
-      displayName: 'Sync changes to Azure DevOps'
+      displayName: 'Sync changes-to-Azure DevOps'
