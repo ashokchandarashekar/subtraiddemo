@@ -1,1 +1,31 @@
+trigger:
+  branches:
+    include:
+      - main  
 
+pool:
+  vmImage: 'ubuntu-latest'
+
+stages:
+- stage: SyncBranch
+  jobs:
+  - job: Sync
+    steps:
+    - checkout: self
+      persistCredentials: true
+      
+    # Clone the Azure Repo
+    - script: |
+        git clone https://ashokc@a5econsulting.net:$(AZURE_PAT)@dev.azure.com/MCSAnalytics/demo/_git/<repo-name> azure-repo
+      displayName: 'Clone Azure DevOps Repo'
+      env:
+        AZURE_PAT: $(AZURE_PAT)
+
+    # Sync changes from GitHub to the Azure Repo
+    - script: |
+        cd azure-repo
+        git remote add github https://github.com/ashokchandarashekar/subtraiddemo.git
+        git fetch github
+        git checkout -B main github/main  # Replace 'main' with your branch name
+        git push origin main --force  # Replace 'main' with your branch name if different
+      displayName: 'Sync changes to Azure DevOps'
