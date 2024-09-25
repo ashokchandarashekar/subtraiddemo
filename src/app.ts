@@ -30,7 +30,7 @@ export async function createApp(): Promise<express.Application> {
     return res.status(200).json({ message: '!You have successfully started the application!' });
   });
 
-  // if error is not an instanceOf APIError, convert it.
+  // if error is not an instanceOf APIError, convert it txt.
   app.use((err: ErrorType | ValidationError, req: Request, res: Response, next: NextFunction) => {
     var error = err;
 
